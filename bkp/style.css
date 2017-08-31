@@ -1,0 +1,273 @@
+/* CSS Document */
+@font-face {
+    font-family: 'oswald_light';
+    src: url('fonts/oswald-light-webfont.eot');
+    src: url('fonts/oswald-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/oswald-light-webfont.woff') format('woff'),
+         url('fonts/oswald-light-webfont.ttf') format('truetype'),
+         url('fonts/oswald-light-webfont.svg#oswald_lightlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'source_sans_proregular';
+    src: url('fonts/sourcesanspro-regular-webfont.eot');
+    src: url('fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/sourcesanspro-regular-webfont.woff') format('woff'),
+         url('fonts/sourcesanspro-regular-webfont.ttf') format('truetype'),
+         url('fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+ul,ol{
+	margin:0;
+	padding:0;
+}
+a{
+	text-decoration:none;
+}
+body {
+	margin:0;
+	padding:0;
+	font-family: 'source_sans_proregular';
+	font-size:14px;
+	background-color:#EFEFEF;
+ }
+input[type="button"], input.btn, a.snbox, a.copy_key{
+    background: linear-gradient(to bottom, #17609c 0%, #17609c 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #033966;
+    border-radius: 3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'source_sans_proregular';
+    padding: 6px 15px;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#17609c', endColorstr='#17609c');/*For IE7-8-9*/  height: 1%;/*For IE7*/
+    height:40px; 
+ }
+ .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover, .dataTables_wrapper .dataTables_paginate .paginate_button:hover
+ {
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#17609c', endColorstr='#17609c');/*For IE7-8-9*/  height: 1%;/*For IE7*/
+ }
+.files_block input[type="button"], .file_upload input[type="button"]{
+	padding:2px 5px;
+}
+ input[type="text"], input[type="password"], input[type="search"], input[type="email"]{
+	font-family: 'source_sans_proregular';
+	border: 1px solid #88dcfc;
+    padding: 3px;	
+	min-width:200px;
+} 
+ .header .logo{
+    background-color: #033966;
+    border: 1px solid #033966;
+    font-family: 'oswald_light';
+    font-size: 20px;
+    margin: 0 auto;
+    padding: 10px 0;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+ }
+.header .logo a{
+	color: #fff;
+} 
+.content #login_form{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    height: auto;
+    margin: 100px auto 0;
+    text-align: center;
+    width: 500px;
+	padding:20px 0;
+	font-size:16px;
+} 
+.message {
+	color:#EA1515;
+}
+#login_form .btn{
+	float:left;
+	font-size:16px;
+	cursor:pointer;
+}
+input.error{
+	border:1px solid #E81212;
+} 
+label.error{
+	display:block;
+	font-size:12px;
+	text-align:left;
+	color:#E81212;
+}
+span.error, .red{
+	color:#E81212;
+}
+.menu{
+	width:980px;
+	margin:0 auto;
+	background-color:#37a7d4;
+	height:50px;
+}
+.menu ul{
+	display:inline-block;
+	list-style:none;
+}
+.menu ul li{
+	float:left;
+}
+.menu ul li a{
+	color:#fff;
+	line-height:50px;
+	font-size:18px;
+	padding:0 9px;
+	display:block;
+}
+.menu ul li.active a{
+	background:#033966;
+}
+.content_div{
+    background-color: #FFFFFF;
+    margin: 0 auto;
+    padding: 10px;
+    width: 960px;
+}
+.footer{
+	padding: 10px;
+    width: 960px;
+	margin:0 auto;
+	background-color:#033966;
+	color:#fff;
+	font-size:14px;
+}
+
+
+.page_title{
+	font-size:16px;
+	font-weight:bold;
+}
+#common-floating-message{
+	position:relative;
+	top:50px;
+	width:980px;
+	margin:0 auto;
+}
+.pagination span, .pagination a{
+	background:linear-gradient(to bottom, #FFFFFF 0%, #DCDCDC 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	border:1px solid #CACACA;
+	color:#333333;
+    margin: 0 0 0 5px;
+    padding: 5px 10px;	
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	-khtml-border-radius:3px;
+}
+.pagination span.current{
+	background:#A2A2A2;
+	border:1px solid #A2A2A2;
+	color:#fff;
+}
+.pagetable, #file_categories_table, #pagetable, #userstable{
+	border-collapse:collapse;
+}
+.pagetable td, #pagetable td, #file_categories_table td, #userstable td,#userstable th, .pagetable th, #pagetable th, #file_categories_table th, #files_table td, #files_table th {
+ 	border:1px solid #37a7d4;
+}
+.pagetable thead, #pagetable thead, #file_categories_table thead, #files_table thead{
+	background:#e4f0f5;
+}
+.pagetable ul, #pagetable ul, #file_categories_table ul{
+	list-style:none;
+}
+table.pagetable.dataTable, table#files_table.dataTable{
+	border-collapse:collapse;
+}
+
+/* File Upload style begin */
+.files_block{
+	clear:both;
+	margin-bottom:10px;
+}
+
+/* File Upload style end */
+
+
+/* File Category Styles begin */
+.file_category input[type="checkbox"]{
+	margin:0;
+}
+
+/* Contacts module Styles */
+#contactsform input[type="text"], #contactsform input[type="email"]{
+	width:250px;
+}
+.dataTables_wrapper{
+	width:900px;
+	margin:0 auto;
+}
+.checkbox_div{
+	float:left;
+	width:33%;
+	margin-bottom:5px;
+}
+.pagetable .DataTables_sort_icon{
+	display:none;
+}
+.uploaded_files .dataTables_wrapper {
+	width:100%;
+}
+.reorder{
+	background:url('../images/reorder.png') no-repeat;
+	width:16px;
+	height:16px;
+	display:block;
+	padding:0 0 0 22px;
+}
+.reorder:hover{
+	cursor:move;
+}
+.page_heading{
+	text-align:center;
+	text-transform:uppercase;
+	color:#033966;
+}
+.amcharts-chart-div a{
+	display:none !important;
+}
+#accordion .ui-accordion-header .ui-accordion-header-icon{
+	background:url('../images/plus.png') no-repeat left center;
+	width:12px;
+	height:12px;
+	display:block;
+}
+.footer .footer_mid{
+	text-align:center;
+}
+table.dataTable.no-footer{
+	border:none !important;
+}
+
+.menu ul>li a:hover ul{
+	display:block;
+}
+ul.submenu{
+	display:none;
+	z-index:999;
+	position: absolute;
+}
+ul.submenu li a{
+	background:#37A7D4;
+	color:#fff;
+}
+ul.submenu li a:hover{
+	background:#033966;
+}
+.menu ul li:hover ul.submenu{    display: block;}
+.menu ul li ul.submenu li a{font-size: 12px;}

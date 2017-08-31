@@ -1,0 +1,157 @@
+<?php
+if($data[0]['status'] == 1 || $data[0]['status'] == "" ){
+$checked_ac = "checked";
+} else {
+$checked_in = "checked"; 
+}
+
+if(isset($_REQUEST['word_search']) && !empty($_REQUEST['word_search']))
+  	 {            
+      $search_result = array(); 
+      $file_name = $data;
+      $word_to_search = strtolower($_REQUEST['word_search']); 
+      require("class.filetotext.php");
+           
+         foreach ($file_name as $key => $value) {
+                    $file_path  = "uploads/category_files/" . $value[file_name];
+
+                    $docObj = new Filetotext($file_path);
+                    $txt = $docObj->convertToText();
+
+                    if (strpos(strtolower($txt), $word_to_search) !== false || strpos(strtolower($value[file_name]), $word_to_search) !== false) {
+                           $search_result[] = $value;
+                    }
+                    else{
+                        
+                    }
+              }         
+            $data = $search_result;
+  	 }
+
+
+?>
+<div class="content_div">
+	<div id="msg"></div>
+	<form name="frm" method="post" action ="">
+		<input type="search" name="word_search">
+		<input type="submit" Value="search">
+	</form>
+	<form class="cmxform" name="file_categories_form" id="file_categories_form" method="post" action="file_categories.php" enctype="multipart/form-data" onsubmit="return category_validate(<?php echo $id; ?>);">
+		<table width="850" border="0" cellspacing="0" cellpadding="10" align="center" class="tble">
+			<tr>
+				<td width="212"><strong><span id="name"><?php echo NAME; ?><span></strong> <span class="red">*</span></td>
+				<td width="652"><input type="text" name="name" id="name_field" value="<?php echo htmlentities($data[0]['category_name'], ENT_QUOTES); ?>"  ></td> 
+			</tr>
+			<tr>
+				<td width="212"><strong><span id="status"><?php echo STATUS; ?><span></strong> </td>
+				<td width="652"> 
+					<input type="radio" name="status" value="1" <?php echo $checked_ac; ?> ><?php echo ACTIVE; ?>
+					<input type="radio" name="status" value="0" <?php echo $checked_in; ?> ><?php echo IN_ACTIVE; ?>
+				</td>
+			</tr>
+		   <?php 
+		   if($data[0]['file_name'] != "") { 
+		   ?>
+			<tr class="uploaded_files">
+				<td width="212" style="vertical-align: top;"><strong>Uploaded files</strong></td>
+				<td width="652">
+					<table border="0" cellspacing="0" cellpadding="10" align="center" class="tble" id="files_table">
+						<thead class="title">
+							<tr>
+								<th><strong><?php echo SNO; ?></strong></th>
+								<th><strong><?php echo "File Name"; ?></strong></th>
+								<th><strong><?php echo "VIEW"; ?></strong></th>
+								<th><strong><?php echo ACTION; ?></strong></th>
+							</tr>	
+						</thead>
+						<tbody>
+						<?php 
+						$count = 1;
+						foreach($data as $files){ ?>
+						<tr id="<?php echo $files['file_id']; ?>">
+							<td width="20"><?php echo $count; ?></td>
+                            <?php if(!file_exists("/home/argo/staging/admin/".'uploads/category_files/'.$files['file_name'])){ ?>
+							<td title="Document not available"><strike><?php echo htmlentities($files['file_name'], ENT_QUOTES); ?></strike></td>
+                            <?php }else{ ?>
+                            <td><?php echo htmlentities($files['file_name'], ENT_QUOTES); ?></td>
+                            <?php } ?>
+                            <td width="20"><a href="viewdoc_pdf.php?file=<?php echo $files['file_name'];?>" target="_blank">View</a>
+                            </td>
+							<td width="20" align="center"><a href="javascript:;"><img width="14" height="17" border="0" align="absmiddle" title="Delete" alt="Delete" src="images/delete.jpg" onclick="delete_category_file('<?php echo $page_name; ?>', <?php echo $files['file_id']; ?>, <?php echo $id; ?>);"></a>
+							 |
+							<a href="javascript:;"><img src="images/reorder.png" alt="Reorder" width="16" height="16" border="0" align="absmiddle" title="Reorder" /></a>
+							</td>
+						</tr>
+						<?php 
+						$count++;
+						} ?>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<?php } ?>
+			<tr class="file_upload">
+				<td width="212"><strong>Upload new file</strong><br/><span class="red">Please upload .doc, .docx and .pdf only</span></td>
+				<td width="652"><input type=file name="files[]" /><input type="button" class="add" value="Add More" style="float:right;" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<span id="button"><input type="submit" class="btn" name="save" value="<?php echo SAVE; ?>" /> </span>
+					<input type="reset" class="btn" value="<?php echo RESET; ?>"  />
+					<input type="button" class="btn" name="cancel" value="<?php echo CANCEL; ?>"  onclick="window.location='file_categories.php'"/>
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" name="type" value="save" />
+		<input type="hidden" name="id" id="id" value="<?php echo $id; ?>" />
+	</form>
+</div>
+
+<link rel="stylesheet" href="libs/data-tables/jquery.dataTables.css" type="text/css"> 
+
+<script type="text/javascript" src="libs/data-tables/jquery.dataTables.js"></script> 
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="libs/data-tables/jquery.dataTables.rowReordering.js"></script>
+ <script type="text/javascript">
+$(document).ready(function () {
+	//jQuery.noConflict();
+	$('#files_table').dataTable({
+		bJQueryUI: true,
+		"paging":   true,
+        "info":     true,
+		"searching": false
+	}).rowReordering({
+			customFunction : true,
+			customSelector : '#files_table tbody tr',
+			customURL : 'file_categories.php',
+			customRequestType : 'POST',
+			customPostType : 'file_ordering'
+	});
+}); 
+</script>
+<script type="text/javascript"> 
+$().ready(function() {
+	// validate signup form on keyup and submit
+	$("#file_categories_form").validate({
+		rules: {
+			name: "required"
+ 		},
+		messages: {
+			name: "Please enter category name"
+ 		}
+	});
+	
+	/* Add multiple rows */
+	$('.tble').on('click', '.del',function(){
+		$(this).parent().parent().remove();
+	});
+				$('.tble').on('click', '.add',function(){
+					$(this).val('Delete');
+					$(this).attr('class','del');
+					var appendTxt = '<tr class="file_upload"><td width="212"><strong>Upload new file</strong><p><span class="red">Please upload .doc, .docx and .pdf only</span></p></td><td width="652"><input type=file name="files[]" /><input type="button" class="add" value="Add More" style="float:right;" /></tr>';
+					$("tr:last").before(appendTxt);			
+				}); 
+	
+});
+</script>  

@@ -1,0 +1,73 @@
+<div class="content_div"> 
+	<h2 class="page_heading"><?php echo $page_title; ?></h2>
+	<table width="900px" border="0" cellspacing="0" cellpadding="10" align="center" class="tble" id="pagetable">
+		<thead class="title">
+			<tr>
+				<th><strong><?php echo SNO; ?></strong></th>
+				<th><strong><?php echo MENU_NAME; ?></strong></th>
+				<th><strong><?php echo MENU_STATUS; ?></strong></th>
+				<th><strong><?php echo ACTION; ?></strong></th>
+			</tr>	
+		</thead>
+		<tbody>
+			<?php  
+			if(count($data) > 0){
+				$i = $start + 1;
+				foreach($data as $row) { 
+					$icon = ($row['status'] == 1) ? "active.gif" : "inactive.gif";
+					$change_status = ($row['status'] == 1) ? 0 : 1;
+					?>
+					<tr id="<?php echo $row['id']; ?>">
+						<td width="30"><?php echo $i; ?></td>
+						<td><?php echo htmlentities($row['name'], ENT_QUOTES); ?></td>
+						<td align="center">
+						<div id="status_div<?php echo $row['id']; ?>">
+							<a href="javascript:;" onclick="change_status('status_div<?php echo $row['id']; ?>', '<?php echo $page_name; ?>', <?php echo $row['id']; ?>, <?php echo $change_status; ?>);" >
+							<img src="images/<?php echo $icon; ?>" width="16" height="16" border="0" />
+							</a>
+						</div>
+						</td>
+						<td align="center">
+						 <a href="menu.php?type=edit&id=<?php echo $row['id']; ?>"><img src="images/edit.jpg" alt="Edit" width="16" height="17" border="0" align="absmiddle" title="Edit" /></a>   
+						<!-- | 
+						<a href="javascript:;" onclick="delete_data('<?php echo $page_name; ?>', <?php echo $row['id']; ?>);" ><img src="images/delete.jpg" alt="Delete" width="14" height="17" border="0" align="absmiddle" title="Delete" /></a> -->
+						 |
+						<a href="javascript:;"><img src="images/reorder.png" alt="Reorder" width="16" height="16" border="0" align="absmiddle" title="Reorder" /></a>
+						</td>
+					</tr>
+				  <?php 
+				  $i++;
+				} 
+			} ?>
+		</tbody>
+	<tfoot>
+	<tr>
+    <td colspan="4" align="center"><input type="button" name="add" value="<?php echo ADD_MENU; ?>" onclick="window.location='menu.php?type=add'"  /></td>
+	</tr>
+	</tfoot>
+</table>
+</div>
+ 
+<link rel="stylesheet" href="libs/data-tables/jquery.dataTables.css" type="text/css"> 
+
+<script type="text/javascript" src="libs/data-tables/jquery.dataTables.js"></script> 
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="libs/data-tables/jquery.dataTables.rowReordering.js"></script>
+ <script type="text/javascript">
+$(document).ready(function () {
+	//jQuery.noConflict();
+	$('#pagetable').dataTable({
+		bJQueryUI: true,
+		"paging":   false,
+        "info":     false,
+		"searching": false
+	}).rowReordering({
+			customFunction : true,
+			customSelector : '#pagetable tbody tr',
+			customURL : 'menu.php',
+			customRequestType : 'POST',
+			customPostType : 'ordering'
+	});
+}); 
+</script>
+</div>
